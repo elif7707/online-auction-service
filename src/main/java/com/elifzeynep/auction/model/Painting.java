@@ -3,7 +3,7 @@ package com.elifzeynep.auction.model;
 public class Painting {
     // Data
     private Price price;
-    private Price highestBid;
+    private Bid highestBid;
     private String name;
     private String artist;
 
@@ -12,7 +12,8 @@ public class Painting {
         this.price = price;
         this.name = name;
         this.artist = artist;
-        this.highestBid = new Price(0, "ELC"); // 0 ELC
+        Price initialPrice = new Price(0, "ELC");
+        this.highestBid = new Bid("Elif Şentürk", initialPrice);
     }
 
     // Methods
@@ -24,17 +25,17 @@ public class Painting {
         this.price = price;
     }
 
-    public Price getHighestBid() {
+    public Bid getHighestBid() {
         return highestBid;
     }
 
-    private void setHighestBid(Price highestBid) {
+    private void setHighestBid(Bid highestBid) {
         this.highestBid = highestBid;
     }
 
-    public void offerPrice(Price bid) {
-        if (highestBid.getValue() < bid.getValue()) {
-            setHighestBid(bid);
+    public void offerBid(Bid offer) {
+        if (highestBid.getPrice().getValue() < offer.getPrice().getValue()) {
+            setHighestBid(offer);
         }
     }
 
